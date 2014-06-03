@@ -1,7 +1,9 @@
 var isNil = require('./util').isNil;
 var makeType = require('./makeType');
 
-var Maybe = makeType(function(x) {this.value = x;}, {
+var Maybe = makeType(
+  function(x) {this.value = x;},
+  {
     map: function(f) { // Functor
       return isNil(this.value) ? this : new Maybe(f(this.value));
     },
@@ -18,7 +20,8 @@ var Maybe = makeType(function(x) {this.value = x;}, {
        return this.value ? f(this.value) : this;
     }
     // Monad, since both Chain and Applicative
-});
+  }
+);
 
 module.exports = Maybe;
 
